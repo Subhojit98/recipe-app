@@ -15,9 +15,9 @@ const ShowCaseRecipes = () => {
         <>
             <div className="w-full h-full flex flex-col items-center justify-center mt-1 ">
                 <div className="w-full md:w-[95%] lg:w-[85%] xl:w-[88%] h-full grid grid-cols-2 mobileScreen:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-1 px-1 gap-y-2">
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh]">
-                        <Card className="w-full h-full ">
-                            <div className="w-full h-2/3 ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg">
+                        <Card className="w-full h-full rounded-lg">
+                            <div className="w-full h-2/3">
                                 <Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
                             </div>
@@ -36,9 +36,9 @@ const ShowCaseRecipes = () => {
                             </div>
                         </Card>
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -63,9 +63,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -90,9 +90,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -117,9 +117,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -144,9 +144,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -171,9 +171,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -198,9 +198,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -225,9 +225,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -252,9 +252,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -279,9 +279,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
@@ -306,9 +306,9 @@ const ShowCaseRecipes = () => {
                         </Card>
 
                     </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] ">
+                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
 
-                        <Card className="w-full h-full ">
+                        <Card className="w-full h-full rounded-lg">
                             <div className="w-full h-2/3 ">
                                 < Image src={test} alt="" width={100} height={100}
                                     className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />

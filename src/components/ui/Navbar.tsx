@@ -24,10 +24,10 @@ const Navbar = () => {
                     </div>
 
                     <div className="lg:flex gap-2 md:gap-4 lg:gap-8 text-lg hidden" >
-                        <li className="cursor-pointer py-4 px-4 hover:bg-slate-200">
+                        <li className="cursor-pointer py-4 px-4 hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] hover:bg-slate-50">
                             Home
                         </li>
-                        <li className="cursor-pointer py-4 px-4 hover:bg-slate-200" onClick={() => router.push('recipes')}>
+                        <li className="cursor-pointer py-4 px-4 hover:shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] hover:bg-slate-50" onClick={() => router.push('recipes')}>
                             Recipes
                         </li>
                     </div>

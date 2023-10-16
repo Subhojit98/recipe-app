@@ -13,7 +13,7 @@ const Footer = () => {
 
                     <Image src={logo} alt='' width={100} height={100} className='w-12 hidden md:block' />
 
-                    <div className="flex gap-3">
+                    <div className="flex gap-3 text-sm">
                         Powered by
                         <Image src={edamanLogo} alt='' width={100} height={100} />
                     </div>
