@@ -8,7 +8,7 @@ const charka = Poppins({ subsets: ['latin'], weight: '400' })
 const Hero = () => {
     return (
         <>
-            <div className=" w-full h-[60vh] mt-1 ">
+            <div className=" w-full h-[60vh]">
                 <div className=" h-full relative mx-1">
                     <Image src={mobileHeroImg} alt="" className="rounded-lg w-full h-full object-cover absolute z-10 md:hidden" />
                     <Image src={desktopHeroImg} alt="" className="rounded-lg w-full h-full object-cover  absolute z-10 hidden md:block" />
