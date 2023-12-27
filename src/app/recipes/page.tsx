@@ -1,4 +1,4 @@
-import RecipesToshow from "@/components/pages/Recipes"
+import RecipesToshow from "@/components/pages/recipes_about/Recipes"
 
 const page = () => {
     return (

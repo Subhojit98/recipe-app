@@ -1,354 +1,128 @@
+"use client"
 import {
     Card,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
 import Image from "next/image"
-import clock from '../assets/icons8-timer-48.png'
-import saveLater from '../assets/icons8-save-40.png'
-import test from '../assets/pexels-rdne-stock-project-6645920.jpg'
-import HelthChoice from "./HelthChoice"
-import { Rubik } from "next/font/google"
-
-
-const rubik = Rubik({
+import clock from '@/assets/icons8-timer-48.png'
+import saveLater from '@/assets/icons8-add-bookmark-30.png'
+import { Roboto } from "next/font/google"
+import { GlobalContext } from "@/context/Context"
+import { useContext, useEffect, useState } from "react"
+import { Context } from "vm"
+import CardLoader from "./ui/CardLoader"
+import useFoodData from "@/utils/FoodApiService"
+import { useLocalStorage } from "@/hooks/useLocalStorage"
+const roboto = Roboto({
     subsets: ['latin'],
-    weight: '400'
+    weight: '400',
 })
-const ShowCaseRecipes = () => {
+const ShowCaseRecipes = ({ foodTabData }: any) => {
+    //  Context Providers
+    const { setOpenFoodTab } = useContext<Context>(GlobalContext)
+    const { setFoodCardDetails } = useContext<Context>(GlobalContext)
+
+    //  fetching Data ->
+    const { data, fetchNextPage, hasNextPage, isFetchingNextPage, error } = useFoodData(foodTabData)
+    const [savedFoods, setSavedFoods] = useState([])
+
+    // Filling Food Card Details Page ->
+
+    const handleFoodCard = (data: string[]) => {
+        setOpenFoodTab('fixed')
+        setFoodCardDetails(data)
+    }
+    // Seting Save-Later Logic -> 
+    const { setItem } = useLocalStorage("savedRecipes")
+    const handleSaveLater = (recipe: object) => {
+
+        setSavedFoods((prevSavedFoods): any => {
+            const updatedFoods = [...prevSavedFoods, recipe];
+            return updatedFoods;
+        });
+    }
+
+
+    useEffect(() => {
+
+        savedFoods.length !== 0 && setItem(savedFoods, "savedRecipes")
+
+    }, [savedFoods])
+
 
     return (
         <>
-            <div className="w-full h-full flex flex-col items-center justify-center mt-1" style={rubik.style}>
-                <div className="w-full md:w-[95%] lg:w-[85%] xl:w-[88%] h-full grid grid-cols-2 mobileScreen:grid-cols-3 md:grid-cols-4 lg:grid-cols-5  gap-1 px-1 gap-y-2">
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg">
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
+            <div className="w-full h-full flex flex-col items-center justify-center mt-1">
+                {
+                    !data && <CardLoader />
+                }
+                <div className="w-full h-full grid grid-cols-2 mobileScreen:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 px-1 gap-y-3" style={roboto.style}>
+                    {
+
+                        data?.pages.flatMap((foodData) => foodData?.hits).map((recipes, i) => {
+                            return <div key={i} className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ease-linear">
+
+                                <Card className="w-full h-full rounded-lg">
+                                    <div className="w-full h-2/3 " onClick={() => handleFoodCard(recipes)}>
+                                        <Image src={recipes.recipe.image} alt="food image" width={100} height={100} placeholder="blur" blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAACAAMDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDB1DVdQj1C4RL+6VVkYBRMwAGfrRRRQhvc/9k='
+                                            className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
                                     </div>
 
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-                                </div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
+                                    <div className="flex flex-col justify-between h-[30%]">
+                                        <CardHeader className="mt-2 ml-3">
+                                            <CardTitle className="text-sm md:text-base">{
+                                                // sorting the text which is too big.. ->
+                                                recipes.recipe.label.length >= 25 ? recipes.recipe.label.split('').splice(0, 25).join("") + '...'
+                                                    :
+                                                    recipes.recipe.label
+                                            }</CardTitle>
+                                        </CardHeader>
 
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
+                                        <div className="w-full flex justify-between">
+                                            <div className="flex gap-1 items-center ml-2">
+                                                <Image src={clock} alt="" className="w-7" />
+                                                <h3 className="text-xs font-mono dark:text-blue-600">{
 
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
+                                                    recipes.recipe.totalTime == 0 ? '< 5 Minutes' :
+                                                        recipes.recipe.totalTime <= 59 ? recipes.recipe.totalTime + " Minutes" :
+                                                            Math.floor(recipes.recipe.totalTime / 60) + " Hours"
+                                                }
+                                                </h3>
+                                            </div>
 
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
+                                            <HoverCard>
+                                                <HoverCardTrigger>     <button onClick={() => handleSaveLater(recipes)}><Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" /></button></HoverCardTrigger>
+                                                <HoverCardContent>
+                                                    Save Later
+                                                </HoverCardContent>
+                                            </HoverCard>
+
+
+                                        </div>
                                     </div>
 
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
+                                </Card>
 
-                                </div>
                             </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
-                    <div className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg ">
-
-                        <Card className="w-full h-full rounded-lg">
-                            <div className="w-full h-2/3 ">
-                                <Image src={test} alt=""
-                                    className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
-                            </div>
-
-                            <div className="flex flex-col justify-between h-[30%]">
-                                <CardHeader className="mt-2 ml-3">
-                                    <CardTitle className="text-base">Card Title</CardTitle>
-                                </CardHeader>
-
-                                <div className="w-full flex justify-between">
-                                    <div className="flex gap-1 items-center ml-2">
-                                        <Image src={clock} alt="" className="w-7" />
-                                        <h3 className="text-xs">1 minutes</h3>
-                                    </div>
-
-                                    <Image src={saveLater} alt="" className="w-7 mr-2 cursor-pointer hover:opacity-70" />
-
-                                </div>
-                            </div>
-
-                        </Card>
-
-                    </div>
+                        })
+                    }
 
                 </div>
-                <button className="relative cursor-pointer lg:mb-0 mt-2 inline-flex items-center justify-center w-auto px-4 py-2 md:px-6 md:py-3 lg:px-8 overflow-hidden font-bold text-gray-500 text-base transition-all duration-500 border border-gray-200 rounded-md group ease bg-gradient-to-b from-white to-gray-50 hover:from-gray-50 hover:to-white active:to-white hover:opacity-80">
-                    <span className="w-full h-0.5 absolute bottom-0 group-active:bg-transparent left-0 bg-gray-300"></span>
-                    <span className="h-full w-0.5 absolute bottom-0 group-active:bg-transparent right-0 bg-gray-300"></span>
-                    Show more
+                <button className="relative cursor-pointer lg:mb-0 mt-5 inline-flex items-center justify-center w-auto px-3 py-2 md:px-6 md:py-3 lg:px-8 overflow-hidden font-bold text-white text-sm mobileScreen:text-base transition-all duration-500  rounded-md ease bg-[#be094b] hover:from-gray-50 hover:opacity-80" onClick={() => fetchNextPage()}>
+                    {isFetchingNextPage
+                        ? 'Loading more...'
+                        : hasNextPage
+                            ? 'Load More'
+                            : 'Nothing more to load'}
                 </button>
-                <HelthChoice />
-
-            </div>
+            </div >
 
         </>
     )
