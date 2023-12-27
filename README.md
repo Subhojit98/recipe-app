@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recipe App
 
-## Getting Started
+Welcome to Recipe App, a web application that allows users to search for food recipes using the Edamam API. This project is designed to provide a simple and intuitive interface for users to discover and explore a wide variety of recipes based on their preferences with sorting feature.
 
-First, run the development server:
+## Table of Contents
+- [Features](#features)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Recipe Search:** Users can search for recipes by entering keywords related to the desired dish or ingredients.
+  
+- **Recipe Details:** Detailed information about each recipe, including ingredients, preparation steps, and nutritional information.
+- 
+- **Edamam API Integration:** The application leverages the Edamam API to fetch real-time recipe data, ensuring up-to-date and accurate information.
+- 
+- **Sort Recipes by Preference:** Recipes and be sorted by Time, Calories, Cuisine type and etc.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Demo
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![application home page](https://github.com/Subhojit98/recipe-app/assets/106329188/e093c357-ce5c-4a24-b780-e82c40893401)
+![searched recipes page](https://github.com/Subhojit98/recipe-app/assets/106329188/5508db6b-957f-479a-9344-5ce848d4abaf)
 
-## Learn More
+Check out the [demo video](demo_video_link) to see the Recipe App in action.
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Subhojit98/recipe-app.git
