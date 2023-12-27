@@ -65,4 +65,7 @@ Check out the [demo video](https://github.com/Subhojit98/recipe-app/assets/10632
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests to contribute to the development of the Recipe App.
-   
+
+## License
+
+This project is licensed under the MIT License.
