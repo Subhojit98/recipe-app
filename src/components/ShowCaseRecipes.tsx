@@ -42,7 +42,7 @@ const ShowCaseRecipes = ({ foodTabData }: any) => {
     const { setItem, getItem } = useSessionStorage("savedRecipes")
     const handleSaveLater = (recipe: object) => {
 
-        setSavedFoods((prevSavedFoods) => {
+        setSavedFoods((prevSavedFoods: any) => {
             const updatedFoods = [...prevSavedFoods, recipe];
             return updatedFoods;
         });
