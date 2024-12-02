@@ -7,7 +7,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import clock from '../../../assets/icons8-timer-48.png'
-import saveLater from '../../../assets/icons8-add-bookmark-30.png'
+import emptyImage from '@/assets/icons8-cooking-64.png'
 import { useContext, useEffect, useState } from 'react'
 import { Context } from 'vm'
 import { GlobalContext } from '@/context/Context'
@@ -34,13 +34,13 @@ const SavedRecipes = () => {
                 <Navbar />
 
                 <div className='flex justify-center w-full h-full mt-10'>
-                    <div className="w-[85%] h-full grid grid-cols-2 mobileScreen:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 gap-y-3">
+                    <div className="w-[90%] h-full grid grid-cols-2 mobileScreen:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 gap-y-3">
                         {
                             isStoredData && getItem("savedRecipes").map((data: any, i: number) => {
                                 return <div key={i} className="w-full h-[30vh] lg:h-[33vh] xl:h-[40vh] hover:shadow-[4.0px_8.0px_8.0px_rgba(0,0,0,0.38)] rounded-lg">
                                     <Card className="w-full h-full rounded-lg">
                                         <div className="w-full h-2/3" onClick={() => handleFoodCard(data)}>
-                                            <Image src={data?.recipe.image} alt="" width={100} height={100}
+                                            <Image src={data?.recipe.image} alt="" width={1000} height={1000}
                                                 className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
                                         </div>
                                         <div className="flex flex-col justify-between h-[30%]">
@@ -60,17 +60,20 @@ const SavedRecipes = () => {
                                     </Card>
                                 </div>
                             })
-
-
-
                         }
-                        {
-                            !isStoredData && <div className="w-full">
-                                <h1 className="text-2xl font-bold text-white">No Saved Recipes</h1>
-                            </div>
-                        }
+
                     </div>
                 </div>
+                {
+                    !isStoredData && <div className="w-full">
+                        <h1 className="text-2xl font-bold text-white mt-10 mx-8 md:mx-14">No Saved Recipes</h1>
+                        <div className="w-full h-[80vh] flex items-center justify-center">
+
+                            <Image src={emptyImage} alt='' className="w-20 h-20 object-cover"></Image>
+                        </div>
+                    </div>
+                }
+
             </div>
 
             {/* Saved Recipe details */}

@@ -67,7 +67,7 @@ const SearchedRecipes = () => {
 
                 <div className="fixed right-7 top-[85%]">
 
-                    <Sheet>
+                    {searchedFood && <Sheet>
                         <SheetTrigger>
                             <div className="flex gap-3 bg-slate-300 text-black px-4 py-3 rounded-xl hover:bg-slate-200 duration-150 ease-out lg:hidden">
                                 <Image src={filterImg} alt="" width={100} height={100} className="w-7" />
@@ -77,7 +77,7 @@ const SearchedRecipes = () => {
                         <SheetContent>
                             <MobileSideBar />
                         </SheetContent>
-                    </Sheet>
+                    </Sheet>}
                 </div>
                 <div className="flex justify-between w-full px-4 py-2">
                     <h1 className="text-xl font-semibold dark:text-[#72b309]">All Recipes</h1>
@@ -113,7 +113,7 @@ const SearchedRecipes = () => {
 
                                     <Card className="w-full h-full rounded-lg">
                                         <div className="w-full h-2/3 " onClick={() => handleFoodCard(recipes)}>
-                                            <Image src={recipes?.recipe.image} alt="food image" width={100} height={100} placeholder="blur" blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAACAAMDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDB1DVdQj1C4RL+6VVkYBRMwAGfrRRRQhvc/9k='
+                                            <Image src={recipes?.recipe.image} alt="food image" width={1000} height={1000} placeholder="blur" blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAACAAMDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDB1DVdQj1C4RL+6VVkYBRMwAGfrRRRQhvc/9k='
                                                 className="object-cover object-center w-full h-full rounded-lg cursor-pointer" />
                                         </div>
 
@@ -154,13 +154,14 @@ const SearchedRecipes = () => {
 
 
                     </div>
-                    <button className="relative cursor-pointer lg:mb-0 mt-5 inline-flex items-center justify-center w-auto px-3 py-2 md:px-6 md:py-3 lg:px-8 overflow-hidden font-bold text-white text-sm mobileScreen:text-base transition-all duration-500  rounded-md ease bg-[#be094b] hover:from-gray-50 hover:opacity-80" onClick={() => fetchNextPage()}>
+                    {searchedFood && <button className="relative cursor-pointer lg:mb-0 mt-5 inline-flex items-center justify-center w-auto px-3 py-2 md:px-6 md:py-3 lg:px-8 overflow-hidden font-bold text-white text-sm mobileScreen:text-base transition-all duration-500  rounded-md ease bg-[#be094b] hover:from-gray-50 hover:opacity-80" onClick={() => fetchNextPage()}>
                         {isFetchingNextPage
                             ? 'Loading more...'
                             : hasNextPage
                                 ? 'Load More'
                                 : 'Nothing more to load'}
                     </button>
+                    }
                 </div >
 
             </div>

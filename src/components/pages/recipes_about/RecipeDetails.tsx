@@ -58,12 +58,12 @@ const RecipeDetails = () => {
 
                 {/* Cancel button --> */}
 
-                <Image className="absolute top-2 left-12 lg:left-10 lg:top-5  rounded-full hover:opacity-80 hover:bg-gray-300 transition-all ease-linear" src={cancelBtn} alt="" width={35} height={35} onClick={() => setOpenFoodTab('hidden')} />
+                <Image className="absolute top-2 left-12 lg:left-10 lg:top-5  rounded-full hover:opacity-80 hover:bg-gray-300 transition-all ease-linear cursor-pointer" src={cancelBtn} alt="" width={35} height={35} onClick={() => setOpenFoodTab('hidden')} />
 
                 <div className="w-full h-full md:flex md:justify-center md:p-3" style={rubik.style}>
                     <div className="flex items-center flex-col md:flex-row md:items-start lg:w-[75%] md:gap-7">
-                        <div className="w-[85%] h-[40vh] md:h-[55vh] lg:h-[67vh] bg-black mt-4 rounded-lg">
-                            <Image src={foodCardDetails?.recipe.image || test} alt="hi" width={100} height={100} className="object-cover object-center w-full h-full rounded-lg" />
+                        <div className="w-[85%] h-[40vh] md:h-[55vh] lg:h-[67vh] bg-gray-800 mt-4 rounded-lg">
+                            <Image src={foodCardDetails?.recipe.image} alt="recipe image" width={1000} height={1000} className="object-cover object-center w-full h-full rounded-lg" />
                         </div>
 
                         <div className="place-self-start mt-5 md:mt-10 w-full px-5">

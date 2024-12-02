@@ -46,7 +46,7 @@ const Navbar = () => {
         <>
             <nav className="h-[8%] w-full border-b-2 border-neutral-300" style={popins.style}>
                 <ul className="flex items-center justify-between px-6">
-                    <div className="flex gap-8 items-center cursor-pointer" onClick={() => window.location.reload()}>
+                    <div className="flex gap-8 items-center cursor-pointer" onClick={changeFabsBtnToHome}>
                         <Image src={logo} alt="" width={100} height={100} className="w-9 object-cover" />
                         <span className="text-xl font-extrabold text-[#020e22] dark:text-[#be094b]" style={roboto.style} >WISK</span>
                     </div>
